@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WTechECommerce.Data.ORM.Context;
 
 namespace WTechECommerce.Data.Migrations
 {
     [DbContext(typeof(WTechECommerceContext))]
-    partial class WTechECommerceContextModelSnapshot : ModelSnapshot
+    [Migration("20220119105909_MainTableCreated")]
+    partial class MainTableCreated
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

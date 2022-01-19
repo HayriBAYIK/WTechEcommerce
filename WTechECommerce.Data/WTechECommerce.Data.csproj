@@ -15,9 +15,7 @@
     <None Remove="Microsoft.EntityFrameworkCore.Tools" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ORM\" />
     <Folder Include="ORM\Context\" />
-    <Folder Include="ORM\Entites\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.0" />
