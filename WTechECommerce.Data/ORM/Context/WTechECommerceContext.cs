@@ -10,7 +10,7 @@ namespace WTechECommerce.Data.ORM.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=94.73.150.3; Database=u9751868_db1EB; UID=u9751868_user1EB; PWD=Pf5GeCA55kYgy722Hj");
+            optionsBuilder.UseSqlServer(@"Server=94.73.150.5; Database=u9751868_db81F; UID=u9751868_user81F; PWD=XJgg29W0XZwn02S");
 
 
             //optionsBuilder.UseSqlServer(@"Server=.; Database=hayriDb; Trusted_connection=true");

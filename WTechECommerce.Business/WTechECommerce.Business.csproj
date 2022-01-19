@@ -4,4 +4,15 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Manager\" />
+    <None Remove="Manager\CategoryManager\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Manager\" />
+    <Folder Include="Manager\CategoryManager\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WTechECommerce.Data\WTechECommerce.Data.csproj" />
+  </ItemGroup>
 </Project>
