@@ -9,7 +9,6 @@
     <None Remove="Manager\CategoryManager\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Manager\" />
     <Folder Include="Manager\CategoryManager\" />
   </ItemGroup>
   <ItemGroup>

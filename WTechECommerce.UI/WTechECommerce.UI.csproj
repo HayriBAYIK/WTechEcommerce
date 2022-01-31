@@ -20,6 +20,12 @@
     <None Remove="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Views\Template\assets\favicon.ico" />
+    <Content Include="Views\Template\css\styles.css" />
+    <Content Include="Views\Template\index.html" />
+    <Content Include="Views\Template\js\scripts.js" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.0">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
@@ -33,7 +39,10 @@
     <Folder Include="Areas\Admin\Views\" />
     <Folder Include="Controllers\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\" />
     <Folder Include="Views\Home\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="wwwroot\js\scripts.js" />
+    <None Include="wwwroot\js\site.js" />
   </ItemGroup>
 </Project>
