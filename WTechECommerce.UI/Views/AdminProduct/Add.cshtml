@@ -1,0 +1,43 @@
+﻿@model WTechECommerce.UI.Areas.Admin.Models.AdminProductVM
+
+
+<form action="/AdminProduct/Add" method="post" enctype="multipart/form-data">
+
+    <div>
+        @Html.LabelFor(q => q.Name)
+        @Html.TextBoxFor(q => q.Name)
+    </div>
+    <div>
+        @Html.LabelFor(q => q.drpCategories)
+
+        <select name="CategoryId">
+            @foreach (var item in Model.drpCategories)
+            {
+                <option value="@item.Id">@item.Name</option>
+            }
+        </select>
+
+
+    </div>
+    <div>
+        @Html.LabelFor(q => q.UnitPrice)
+        @Html.TextBoxFor(q => q.UnitPrice)
+    </div>
+    <div>
+        @Html.LabelFor(q => q.Code)
+        @Html.TextBoxFor(q => q.Code)
+    </div>
+    <div>
+        @Html.LabelFor(q => q.Description)
+        @Html.TextAreaFor(q => q.Description)
+    </div>
+    <div>
+
+        @Html.LabelFor(q => q.MainProductImg)
+       <input type="file" name="MainProductImg"accept=".gif,.jpg,.jpeg,.png" />
+
+    </div>
+
+    <input type="submit" value="Add"/>
+
+</form>
