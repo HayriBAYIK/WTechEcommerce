@@ -32,34 +32,38 @@ namespace WTechECommerce.UI.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Add(AdminProductVM model)
         {
-            Product product = new Product();
-            product.Name = model.Name;
-            product.Description = model.Description;
-            product.CategoryId = model.CategoryId;
-            product.Code = model.Code;
-
-            string mainProductPath = "";
-
-            //Öncelikle uniq dosya adı oluşturmak için Guid kullanıyoruz
-            var guid = Guid.NewGuid().ToString();
-
-            //Yüklenecek olan dosyanın uzantısını alıyorum
-            var extension = Path.GetExtension(model.MainProductImg.FileName);
-
-            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/site/products", guid + extension);
-
-            using (var stream = System.IO.File.Create(path))
+            if (ModelState.IsValid)
             {
-                model.MainProductImg.CopyTo(stream);
+                Product product = new Product();
+                product.Name = model.Name;
+                product.Description = model.Description;
+                product.CategoryId = model.CategoryId;
+                product.Code = model.Code;
+
+                string mainProductPath = "";
+
+                //Öncelikle uniq dosya adı oluşturmak için Guid kullanıyoruz
+                var guid = Guid.NewGuid().ToString();
+
+                //Yüklenecek olan dosyanın uzantısını alıyorum
+                var extension = Path.GetExtension(model.MainProductImg.FileName);
+
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/site/products", guid + extension);
+
+                using (var stream = System.IO.File.Create(path))
+                {
+                    model.MainProductImg.CopyTo(stream);
+                }
+
+
+                mainProductPath = guid + extension;
+
+                product.MainImgPath = mainProductPath;
+
+
+                ProductManager.Add(product);
             }
 
-
-            mainProductPath = guid + extension;
-
-            product.MainImgPath = mainProductPath;
-
-
-            ProductManager.Add(product);
 
 
             return View();

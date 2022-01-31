@@ -32,5 +32,16 @@ namespace WTechECommerce.Business.Manager.ProductManager
             product.IsDeleted = true;
             wTechECommerceContext.SaveChanges();
         }
+
+
+        public static Product GetProductById(int id)
+        {
+            WTechECommerceContext wTechECommerceContext = new WTechECommerceContext();
+
+            Product product = wTechECommerceContext.Products.FirstOrDefault(q => q.IsDeleted == false && q.Id == id);
+
+            return product;
+
+        }
     }
 }

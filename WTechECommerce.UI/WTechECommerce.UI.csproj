@@ -21,6 +21,7 @@
     <None Remove="Views\Home\Partial\" />
     <None Remove="Views\AdminHome\" />
     <None Remove="Views\AdminProduct\" />
+    <None Remove="Models\Helper\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\site\" />
@@ -52,6 +53,7 @@
     <Folder Include="Views\AdminProduct\" />
     <Folder Include="wwwroot\site\" />
     <Folder Include="wwwroot\site\products\" />
+    <Folder Include="Models\Helper\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="wwwroot\js\scripts.js" />
