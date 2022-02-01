@@ -23,6 +23,7 @@ namespace WTechECommerce.UI.Controllers
             List<ProductVM> model = ProductManager.GetProducts().Take(10).Select(q => new ProductVM()
             {
                 Id = q.Id,
+                Description=q.Description,
                 Name = q.Name,
                 UnitPrice = q.UnitPrice.ToString(),
                 MainImgPath = q.MainImgPath,

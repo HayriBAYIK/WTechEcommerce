@@ -7,17 +7,18 @@ namespace WTechECommerce.UI.Areas.Admin.Models
 {
     public class AdminProductVM
     {
-        [Required(ErrorMessage = "Name alanı boş bırakılamaz")]
+        [Required(ErrorMessage = "İsim alanı boş bırakılamaz")]
         [Display(Name ="Ad")]
         public string Name { get; set; }
-
-        [Required(ErrorMessage = "Fiyat alanı boş bırakılamaz")]
+       
         [Display(Name = "Fiyat")]
+        [Required(ErrorMessage ="Fiyat alanı boş bırakılamaz")]
         public decimal UnitPrice { get; set; }
 
         [Display(Name = "Açıklama")]
         public string Description { get; set; }
 
+        [Required(ErrorMessage = "Kod alanı boş bırakılamaz")]
         [Display(Name = "Kod")]
         public string Code { get; set; }
 

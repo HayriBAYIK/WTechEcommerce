@@ -1,13 +1,19 @@
 ﻿@model WTechECommerce.UI.Areas.Admin.Models.AdminProductVM
 
-@Html.ValidationSummary()
-<form action="/AdminProduct/Add" method="post" enctype="multipart/form-data">
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
 
+
+<form action="/AdminProduct/Add" method="post" enctype="multipart/form-data">
+    
     <div>
+        @Html.ValidationSummary()     
         @Html.LabelFor(q => q.Name)
-        @Html.TextBoxFor(q => q.Name)
+        @Html.TextBoxFor(q => q.Name, new {@class="form-control"})
     </div>
     <div>
+        <br />
         @Html.LabelFor(q => q.drpCategories)
 
         <select name="CategoryId">
@@ -20,30 +26,33 @@
 
     </div>
     <div>
+        
         @Html.LabelFor(q => q.UnitPrice)
-        @Html.TextBoxFor(q => q.UnitPrice)
+        @Html.TextBoxFor(q => q.UnitPrice, new {@class="form-control"} )
     </div>
     <div>
+        
         @Html.LabelFor(q => q.Code)
-        @Html.TextBoxFor(q => q.Code)
+        @Html.TextBoxFor(q => q.Code, new {@class="form-control"})
     </div>
     <div>
         @Html.LabelFor(q => q.Description)
-        @Html.TextAreaFor(q => q.Description)
+        @Html.TextAreaFor(q => q.Description, new {@class="form-control"})
     </div>
     <div>
-
+        <br />
         @Html.LabelFor(q => q.MainProductImg)
         <input type="file" name="MainProductImg" accept=".gif,.jpg,.jpeg,.png" />
 
     </div>
-
+    <br />
     <div>
 
         @Html.LabelFor(q => q.ProductImages)
         <input type="file" multiple name="ProductImages" accept=".gif,.jpg,.jpeg,.png" />
 
     </div>
+<br />
 
     <input type="submit" value="Add" />
 
