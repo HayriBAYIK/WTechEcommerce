@@ -20,7 +20,7 @@ namespace WTechECommerce.Business.Manager.CategoryManager
         }
 
         //getByid
-        public static Category GetCategory(int id)
+        public static Category GetCategoryById(int id)
         {
             WTechECommerceContext wTechECommerceContext = new WTechECommerceContext();
 
