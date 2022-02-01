@@ -25,7 +25,7 @@ namespace WTechECommerce.Data.ORM.Context
         public DbSet<ProductImage> ProductImages { get; set; }
         public DbSet<ProductComments> ProductComments { get; set; }
         public DbSet<ProductStar> ProductStars { get; set; }
-
+        public DbSet<AdminUser> AdminUsers { get; set; }
 
     }
 }
