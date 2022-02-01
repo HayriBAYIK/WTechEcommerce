@@ -26,14 +26,6 @@
                             <div class="text-center">
                                 <!-- Product name-->
                                 <h5 class="fw-bolder">@item.Name</h5>
-                                <!-- Product reviews-->
-                                <div class="d-flex justify-content-center small text-warning mb-2">
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                </div>
                                 <!-- Product price-->
                                 <span class="text-muted text-decoration-line-through">
 @item.UnitPrice</span>
@@ -44,7 +36,11 @@
                         </div>
                         <!-- Product actions-->
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                            <div class="text-center">
+
+                                <button class="btn btn-outline-dark mt-auto" onclick="addCart(@item.Id)">Add to cart</button>
+
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -55,3 +51,19 @@
         </div>
     </div>
 </section>
+<script>
+
+    function addCart(id) {
+        $.ajax({
+
+            url: "/Cart/AddCart/",
+            type: "POST",
+            data: { ProductId: id },
+            success: function (result) {
+                alert("Ürün sepete başarıyla eklendi!");
+                $("#cartCount").html(result);
+            }
+        })
+    }
+
+</script>

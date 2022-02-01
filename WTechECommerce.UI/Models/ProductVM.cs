@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 
 namespace WTechECommerce.UI.Models
@@ -25,15 +26,10 @@ namespace WTechECommerce.UI.Models
 
         }
         public string MainImgPath { get; set; }
+        public List<string> ImagePaths { get; set; }
     }
 }
 
 
-//@item.UnitPrice.ToString("c", CultureInfo.GetCultureInfo("tr-TR"))
-//public string Name   // property
-//{
-//    get { return name; }   // get method
-//    set { name = value; }  // set method
-//}
 
 

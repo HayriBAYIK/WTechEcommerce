@@ -24,6 +24,8 @@ namespace WTechECommerce.Business.Manager.ProductManager
             product.AddDate = DateTime.Now;
             wTechECommerceContext.Products.Add(product);
             wTechECommerceContext.SaveChanges();
+
+
         }
         public static void Delete(int id)
         {

@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
+using WTechECommerce.Business.Manager.ProductImageManager;
 using WTechECommerce.Business.Manager.ProductManager;
 using WTechECommerce.Data.ORM.Entites;
 using WTechECommerce.UI.Models;
@@ -11,7 +13,7 @@ using WTechECommerce.UI.Models.Helper;
 
 namespace WTechECommerce.UI.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : SiteBaseController
     {
 
         [Route("Anasayfa")]
@@ -27,6 +29,8 @@ namespace WTechECommerce.UI.Controllers
                 urlSlug = PageUrlHelper.FriendlyUrl(q.Name)
 
         }).ToList();
+
+           
 
             return View(model);
         }
@@ -44,6 +48,12 @@ namespace WTechECommerce.UI.Controllers
                 model.Name = product.Name;
                 model.UnitPrice = product.UnitPrice.ToString();
                 model.urlSlug = PageUrlHelper.FriendlyUrl(product.Name);
+
+
+
+                List<ProductImage> productImages = ProductImageManager.GetProductImagesByProductId(id);
+
+                model.ImagePaths = productImages.Select(q => q.ImagePath).ToList();
 
                 return View(model);
             }

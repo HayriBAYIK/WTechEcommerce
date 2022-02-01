@@ -7,9 +7,11 @@
   <ItemGroup>
     <None Remove="Manager\" />
     <None Remove="Manager\CategoryManager\" />
+    <None Remove="Manager\ProductImageManager\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Manager\CategoryManager\" />
+    <Folder Include="Manager\ProductImageManager\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WTechECommerce.Data\WTechECommerce.Data.csproj" />

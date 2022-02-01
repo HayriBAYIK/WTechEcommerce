@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using WTechECommerce.UI.Models.Helper;
 
 namespace WTechECommerce.UI.Controllers
 {
@@ -6,6 +8,7 @@ namespace WTechECommerce.UI.Controllers
     {
         public IActionResult Index()
         {
+    
             return View();
         }
     }

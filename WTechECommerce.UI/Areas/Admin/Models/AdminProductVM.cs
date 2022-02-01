@@ -29,5 +29,8 @@ namespace WTechECommerce.UI.Areas.Admin.Models
 
         [Display(Name="Ana Ürün Resmi")]
         public IFormFile MainProductImg { get; set; }
+
+        [Display(Name = "Ürün Resimleri")]
+        public List<IFormFile> ProductImages { get; set; }
     }
 }

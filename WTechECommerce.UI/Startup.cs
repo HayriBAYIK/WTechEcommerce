@@ -22,6 +22,7 @@ namespace WTechECommerce
             
             services.AddMvc();
             services.AddControllersWithViews();
+            services.AddSession();
             
         }
 
@@ -38,6 +39,8 @@ namespace WTechECommerce
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseSession();
 
 
             app.UseEndpoints(endpoints =>

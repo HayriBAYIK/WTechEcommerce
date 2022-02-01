@@ -34,10 +34,17 @@
     <div>
 
         @Html.LabelFor(q => q.MainProductImg)
-       <input type="file" name="MainProductImg"accept=".gif,.jpg,.jpeg,.png" />
+        <input type="file" name="MainProductImg" accept=".gif,.jpg,.jpeg,.png" />
 
     </div>
 
-    <input type="submit" value="Add"/>
+    <div>
+
+        @Html.LabelFor(q => q.ProductImages)
+        <input type="file" multiple name="ProductImages" accept=".gif,.jpg,.jpeg,.png" />
+
+    </div>
+
+    <input type="submit" value="Add" />
 
 </form>
