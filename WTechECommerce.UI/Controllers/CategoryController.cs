@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WTechECommerce.Business.Manager.CategoryManager;
 using WTechECommerce.Data.ORM.Entites;
+using WTechECommerce.UI.Models;
 
 namespace WTechECommerce.UI.Controllers
 {
@@ -13,7 +14,14 @@ namespace WTechECommerce.UI.Controllers
     
         public IActionResult Index()
         {
-            List<Category> categories = CategoryManager.GetCategories();
+            List<CategoryVM> categories = CategoryManager.GetCategories().Select(q => new CategoryVM()
+            {
+                Id = q.Id,
+                Name = q.Name,
+                AddDate = q.AddDate,
+                IsDeleted = q.IsDeleted
+
+            }).ToList();         
 
 
             return View(categories);
@@ -27,18 +35,33 @@ namespace WTechECommerce.UI.Controllers
 
 
         [HttpPost]
-        public IActionResult Add(Category category)
+        public IActionResult Add(CategoryVM categoryVm)
         {
+            Category category = new Category();
+            category.Name = categoryVm.Name; 
             CategoryManager.Add(category);
+
 
             return View();
         }
 
         public IActionResult Detail(int id)
         {
-            Category category = CategoryManager.GetCategory(id);
 
-            return View(category);
+            Category category = CategoryManager.GetCategoryById(id);
+
+            if (category != null)
+            {
+                CategoryVM model = new CategoryVM();
+                model.Id = category.Id;
+                model.Name = category.Name;
+                model.AddDate = category.AddDate;
+                model.IsDeleted = category.IsDeleted;               
+
+                return View(model);
+            }
+
+            return RedirectToAction("Index","Category");
 
         }
     }
