@@ -62,7 +62,21 @@ namespace WTechECommerce.UI.Controllers
             }
 
             return RedirectToAction("Index","Category");
+        }
+
+        public IActionResult AddCategory(CategoryVM categoryVm)
+        {
+            Category category = new Category();
+            category.Name = categoryVm.Name;
+            CategoryManager.Add(category);
+
+
+            categoryVm.AddDate = category.AddDate;
+            categoryVm.Id = category.Id;
+
+            return Json(categoryVm);
 
         }
+       
     }
 }

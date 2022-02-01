@@ -3,6 +3,12 @@
 }
 @model List<WTechECommerce.UI.Models.CategoryVM>
 
+    <div class="mb-3">
+        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#AddCategoryModal" >Kategori Ekle</button>
+    </div>
+    <div id="alert" class="text-danger mb-3">
+        
+    </div>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
@@ -16,7 +22,9 @@
                         <tr>
                             <th>#</th>
                             <th>Kategori Başlık</th>
-                            <th>Eklenme Tarihi</th>                            
+                            <th>Eklenme Tarihi</th>
+                            <th> </th>
+
                         </tr>
                     </thead>
                     <tfoot>
@@ -24,17 +32,20 @@
                             <th>#</th>
                             <th>Kategori Başlık</th>
                             <th>Eklenme Tarihi</th>
+                            <th> </th>
+
                         </tr>
                     </tfoot>
                     <tbody>
                         @foreach (var item in Model)
                         {
-                            <tr>
-                                <td>@item.Id</td>
-                                <td>@item.Name</td>
-                                <td>@item.AddDate.ToString("dd/MM/yyyy")</td>
-                                
-                            </tr>
+                        <tr id="categoryId_" + @item.Id>
+                            <td>@item.Id</td>
+                            <td>@item.Name</td>
+                            <td >@item.AddDate.ToString("dd/MM/yyyy")</td>
+                            <td><button class="btn btn-danger btn-sm" onclick="deleteCategory(@item.Id )" id=""+@item.Id>Delete</button></td>
+
+                        </tr>
 
                         }
 
@@ -44,3 +55,84 @@
             </div>
         </div>
     </div>
+
+
+
+    <!-- Add Category Modal -->
+
+    <div class="modal fade" id="AddCategoryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Yeni Kategori Ekle</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Kategori Başlık:</label>
+                            <input type="text" class="form-control" id="CategoryName">
+                        </div>                        
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="addCategory()"> Kategori Ekle </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+ <script>
+
+     function addCategory() {
+         console.log("add category")
+    var category = new Object();
+    category.Name = $("#CategoryName").val();
+
+        $.ajax({
+            url: "/category/AddCategory",
+            type: "POST",
+            data: category,
+            success: function (res) {
+                console.log("add category Ok")
+
+                $('#AddCategoryModal').modal('hide');
+                $("table").append(`<tr id="categoryid_` + res.id + `">
+                <td> `+ res.id + ` </td>
+                <td> `+ res.name + ` </td>
+                <td> `+ formatDate(res.addDate) + `</td>
+                <td><button  class="b   tn btn-danger btn-sm" onclick="deleteCategory(`+ res.id + ` )" id="` + res.id + `">Delete</button></td>
+            </tr><`)
+                $("#alert").text("'" + category.Name + "' has Added!");
+                $("#alert").show();
+               
+            }
+        })
+     }
+
+
+     
+  
+
+     function formatDate(userDate) {
+         var date = new Date(userDate);
+         y = date.getFullYear().toString();
+         m = (date.getMonth()+1).toString();
+         d = date.getDate().toString();
+        
+
+         if (d < 10) {
+             d = '0' + d;
+         }
+         if (m < 10) {
+             m = '0' + m;
+         }
+         return d + '.' + m + '.' + y;
+        
+     }
+
+ </script>
