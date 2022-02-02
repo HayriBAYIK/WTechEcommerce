@@ -21,8 +21,7 @@ namespace WTechECommerce.UI.Controllers
                 AddDate = q.AddDate,
                 IsDeleted = q.IsDeleted
 
-            }).ToList();         
-
+            }).ToList();
 
             return View(categories);
         }
@@ -75,8 +74,24 @@ namespace WTechECommerce.UI.Controllers
             categoryVm.Id = category.Id;
 
             return Json(categoryVm);
-
         }
-       
+
+        public IActionResult UpdateCategory(CategoryVM categoryVm)
+        {
+            Category category = new Category();
+            category.Name = categoryVm.Name;
+            category.Id = categoryVm.Id;
+            CategoryManager.Update(category);
+
+            return Json("Ok");
+        }
+
+        public IActionResult DeleteCategory(int id)
+        {
+            CategoryManager.Delete(id);
+
+            return Json("Ok");
+        }
+
     }
 }
