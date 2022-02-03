@@ -20,7 +20,7 @@ namespace WTechECommerce.Business.Manager.CategoryManager
         }
 
         //getByid
-        public static Category GetCategory(int id)
+        public static Category GetCategoryById(int id)
         {
             WTechECommerceContext wTechECommerceContext = new WTechECommerceContext();
 
@@ -42,6 +42,19 @@ namespace WTechECommerce.Business.Manager.CategoryManager
 
 
         }
+        public static void Update(Category category)
+        {
+
+            WTechECommerceContext wTechECommerceContext = new WTechECommerceContext();
+
+            Category updateCategory = wTechECommerceContext.Categories.FirstOrDefault(q=>q.Id==category.Id && q.IsDeleted==false);
+
+            updateCategory.Name = category.Name;
+            
+            wTechECommerceContext.SaveChanges();
+
+
+        }
 
         public static void Delete(int id)
         {
@@ -50,6 +63,22 @@ namespace WTechECommerce.Business.Manager.CategoryManager
             Category category = wTechECommerceContext.Categories.FirstOrDefault(q => q.Id == id);
             category.IsDeleted = true;
 
+            wTechECommerceContext.SaveChanges();
+
+        }
+
+        // silinen bütün kategorileri geri getirme.
+        public static void Active()
+        {
+            WTechECommerceContext wTechECommerceContext = new WTechECommerceContext();
+
+            List<Category> categories = wTechECommerceContext.Categories.Where(q => q.IsDeleted == true).ToList();
+
+            foreach (var item in categories)
+            {
+                item.IsDeleted = false;
+
+            }
             wTechECommerceContext.SaveChanges();
 
         }

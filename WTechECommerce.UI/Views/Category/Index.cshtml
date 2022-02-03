@@ -1,0 +1,220 @@
+﻿@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@model List<WTechECommerce.UI.Models.CategoryVM>
+
+<div class="mb-3">
+    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#AddCategoryModal">Kategori Ekle</button>
+</div>
+<div id="alert" class="text-danger text-xl-left mb-3">
+
+</div>
+
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Kategori Liste</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Kategori Başlık</th>
+                        <th>Eklenme Tarihi</th>
+                        <th> </th>
+
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>#</th>
+                        <th>Kategori Başlık</th>
+                        <th>Eklenme Tarihi</th>
+                        <th> </th>
+
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr id="categoryid_@item.Id">
+                        <td>@item.Id</td>
+                        <td id="categoryName_@item.Id">@item.Name</td>
+                        <td>@item.AddDate.ToString("dd/MM/yyyy")</td>
+                        <td>
+                            <button class="btn btn-danger btn-sm mr-2" onclick="deleteCategory(@item.Id)" id="@item.Id">Sil</button>
+
+                            <button class="btn btn-primary btn-sm"  onclick="updateCategory('@item.Id','@item.Name')" id="@item.Id">Güncelle</button>
+                        </td>
+
+
+                    </tr>
+
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Add Category Modal -->
+
+<div class="modal fade" id="AddCategoryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Yeni Kategori Ekle</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Kategori Başlık:</label>
+                        <input type="text" class="form-control" id="CategoryName">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                <button type="button" class="btn btn-primary" onclick="addCategory()"> Kategori Ekle </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Update Category Modal -->
+
+<div class="modal fade" id="UpdateCategoryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Kategori Güncelle</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Kategori Başlık:</label>
+                        <input type="text" class="form-control" id="UpdateCategoryName">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                <button type="button" class="btn btn-primary" id="UpdateButton"> Kategori Güncelle </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    function addCategory() {
+        var category = new Object();
+        category.Name = $("#CategoryName").val();
+
+        $.ajax({
+            url: "/category/AddCategory",
+            type: "POST",
+            data: category,
+            success: function (res) {
+                              
+                $("table").append(`<tr id="categoryid_` + res.id + `">
+                <td> `+ res.id + ` </td>
+                <td> `+ res.name + ` </td>
+                <td> `+ formatDate(res.addDate) + `</td>
+                <td><button  class="btn btn-danger btn-sm" onclick="deleteCategory(`+ res.id + ` )" id="` + res.id + `">Sil</button></td>
+                <td><button  class="btn btn-primary btn-sm" onclick="updateCategory(`+ res.id + ` )" id="` + res.id + `">Güncelle</button></td>
+            </tr><`)
+                $("#alert").text("'" + category.Name + "' Eklendi!");
+                $("#alert").show();
+
+            }
+        })
+    }
+
+    function updateCategory(id,name) {
+       
+        var categoryId = id;
+        var categoryName = name;
+        $("#UpdateCategoryName").val(name);
+        $('#UpdateCategoryModal').modal('show');
+        
+
+        $("#UpdateButton").click(function () {
+            var category = new Object();
+            category.Name = $("#UpdateCategoryName").val();
+            category.Id = categoryId;
+
+            $.ajax({
+                url: "/category/UpdateCategory",
+                type: "POST",
+                data: category,
+                success: function (res) {
+                    
+                    $("#alert").text("'" + category.Name + "' Güncellendi!");
+                    $("#alert").show();
+                    $("#categoryName_" + category.Id).text(category.Name);
+                    $('#UpdateCategoryModal').modal('hide');
+           
+                }
+            })
+
+        });
+
+       
+    }
+
+
+    function formatDate(userDate) {
+        var date = new Date(userDate);
+        y = date.getFullYear().toString();
+        m = (date.getMonth() + 1).toString();
+        d = date.getDate().toString();
+
+
+        if (d < 10) {
+            d = '0' + d;
+        }
+        if (m < 10) {
+            m = '0' + m;
+        }
+        return d + '.' + m + '.' + y;
+
+    }
+
+    function deleteCategory(id) {
+        var categoryId = id;
+
+        var result = window.confirm('Are You Sure?', 'Silme Onay!!');
+        if (result == true) {
+
+            $.ajax({
+                url: "/Category/DeleteCategory/" + categoryId,
+                type: "GET",
+                success: function () {
+
+
+                    $("#alert").text("'" + categoryId + "'Silindi!");
+                    $("#alert").show();
+                    $("#categoryid_" + categoryId).fadeOut(1000, function () {
+                        console.log(categoryId)
+                    });
+                }
+            })
+        };
+
+    }
+
+</script>
