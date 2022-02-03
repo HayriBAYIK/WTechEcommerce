@@ -37,7 +37,6 @@ namespace WTechECommerce.UI.Areas.Admin.Controllers
             {
                 Product product = new Product();
                 product.Name = model.Name;
-                product.Description = model.Description;
                 product.CategoryId = model.CategoryId;
                 product.Code = model.Code;
                 product.UnitPrice = model.UnitPrice;
