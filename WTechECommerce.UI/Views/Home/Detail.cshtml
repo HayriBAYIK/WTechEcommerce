@@ -25,10 +25,10 @@
                     <span class="text-decoration-line-through">@Model.UnitPrice</span>
                     <span>@Model.UnitPrice</span>
                 </div>
-                <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem quidem modi. Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius blanditiis delectus ipsam minima ea iste laborum vero?</p>
+                <p class="lead">@Model.Description</p>
                 <div class="d-flex">
-                    <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
-                    <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                    <input class="form-control text-center me-3" id="inputQuantity" type="number" value="1" style="max-width: 4rem" />
+                    <button class="btn btn-outline-dark flex-shrink-0" onclick="addCart(@Model.Id)" type="button">
                         <i class="bi-cart-fill me-1"></i>
                         Add to cart
                     </button>
@@ -37,3 +37,24 @@
         </div>
     </div>
 </section>
+
+
+<script>
+    
+    function addCart(id) {
+
+        var quantity = $("#inputQuantity").val()
+
+        $.ajax({
+
+            url: "/Cart/AddCart/",
+            type: "POST",
+            data: { ProductId: id, Quantity: quantity },
+            success: function (result) {
+                alert("Ürün sepete başarıyla eklendi!");
+                $("#cartCount").html(result);
+            }
+        })
+    }
+
+</script>

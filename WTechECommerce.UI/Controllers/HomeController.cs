@@ -49,7 +49,7 @@ namespace WTechECommerce.UI.Controllers
                 model.Name = product.Name;
                 model.UnitPrice = product.UnitPrice.ToString();
                 model.urlSlug = PageUrlHelper.FriendlyUrl(product.Name);
-
+                model.Description = product.Description;
 
 
                 List<ProductImage> productImages = ProductImageManager.GetProductImagesByProductId(id);

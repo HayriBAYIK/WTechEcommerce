@@ -1,0 +1,20 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@model List<WTechECommerce.UI.Models.ProductCartItemVM>
+
+
+<div>
+    @foreach (var item in Model)
+    {
+        <div>
+            <span>Name: @item.Title</span>
+            <p>Desc: @item.Description</p>
+            <span>Price: @item.UnitPrice</span>
+            <span>Quantity: @item.Quantity</span>
+        </div>
+    }
+
+</div>

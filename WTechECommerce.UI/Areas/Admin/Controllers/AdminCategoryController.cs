@@ -7,9 +7,9 @@ using WTechECommerce.Business.Manager.CategoryManager;
 using WTechECommerce.Data.ORM.Entites;
 using WTechECommerce.UI.Models;
 
-namespace WTechECommerce.UI.Controllers
+namespace WTechECommerce.UI.Areas.Admin.Controllers
 {
-    public class CategoryController : Controller
+    public class AdminCategoryController : Controller
     {
     
         public IActionResult Index()

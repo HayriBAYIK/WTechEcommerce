@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using WTechECommerce.Business.Manager.ProductManager;
+using WTechECommerce.Data.ORM.Entites;
 using WTechECommerce.UI.Models;
 using WTechECommerce.UI.Models.Helper;
 
@@ -12,6 +14,39 @@ namespace WTechECommerce.UI.Controllers
 {
     public class CartController : Controller
     {
+
+        public IActionResult Index()
+        {
+            UserCart cart = HttpContext.Session.GetCart("cart");
+
+            List<ProductCartItemVM> model = new List<ProductCartItemVM>();
+
+            if (cart != null)
+            {
+                foreach (var item in cart.UserCartItems)
+                {
+                    ProductCartItemVM productCartItem = new ProductCartItemVM();
+
+                    Product product = ProductManager.GetProductById(item.ProductId);
+
+                    productCartItem.Title = product.Name;
+                    productCartItem.Description = product.Description;
+                    productCartItem.UnitPrice = product.UnitPrice;
+                    productCartItem.MainImg = product.MainImgPath;
+                    productCartItem.Id = product.Id;
+
+                    productCartItem.Quantity = item.Quantity;
+
+
+                    model.Add(productCartItem);
+
+                }
+            }
+
+            return View(model);
+        }
+
+
         [HttpPost]
         public IActionResult AddCart(UserCartItem item)
         {

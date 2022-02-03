@@ -10,8 +10,11 @@ namespace WTechECommerce.UI.Areas.Admin.Models
         [Required(ErrorMessage = "İsim alanı boş bırakılamaz")]
         [Display(Name ="Ad")]
         public string Name { get; set; }
-       
+
+
         [Display(Name = "Fiyat")]
+        [RegularExpression(@"\d+(\.\d{1,2})?", ErrorMessage = "Invalid price")]
+        [Range(0, 9999999999999999.99, ErrorMessage ="Lütfen belirli aralıkta fiyat giriniz")]
         [Required(ErrorMessage ="Fiyat alanı boş bırakılamaz")]
         public decimal UnitPrice { get; set; }
 

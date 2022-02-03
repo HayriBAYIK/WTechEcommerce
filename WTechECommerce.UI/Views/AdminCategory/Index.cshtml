@@ -125,7 +125,7 @@
         category.Name = $("#CategoryName").val();
 
         $.ajax({
-            url: "/category/AddCategory",
+            url: "/AdminCategory/AddCategory",
             type: "POST",
             data: category,
             success: function (res) {
@@ -158,7 +158,7 @@
             category.Id = categoryId;
 
             $.ajax({
-                url: "/category/UpdateCategory",
+                url: "/AdminCategory/UpdateCategory",
                 type: "POST",
                 data: category,
                 success: function (res) {
@@ -201,7 +201,7 @@
         if (result == true) {
 
             $.ajax({
-                url: "/Category/DeleteCategory/" + categoryId,
+                url: "/AdminCategory/DeleteCategory/" + categoryId,
                 type: "GET",
                 success: function () {
 
