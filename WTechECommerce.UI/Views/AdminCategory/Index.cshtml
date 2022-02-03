@@ -129,16 +129,17 @@
             type: "POST",
             data: category,
             success: function (res) {
-                              
+                $('#AddCategoryModal').modal('hide');
                 $("table").append(`<tr id="categoryid_` + res.id + `">
                 <td> `+ res.id + ` </td>
                 <td> `+ res.name + ` </td>
-                <td> `+ formatDate(res.addDate) + `</td>
-                <td><button  class="btn btn-danger btn-sm" onclick="deleteCategory(`+ res.id + ` )" id="` + res.id + `">Sil</button></td>
-                <td><button  class="btn btn-primary btn-sm" onclick="updateCategory(`+ res.id + ` )" id="` + res.id + `">Güncelle</button></td>
+                <td> `+ formatDate(res.addDate) + `</td>    
+                <td><button  class="btn btn-danger btn-sm mr-2" onclick="deleteCategory(`+ res.id + ` )" id="` + res.id + `">Sil</button>
+                <button  class="btn btn-primary btn-sm" onclick="updateCategory(`+ res.id + ` )" id="` + res.id + `">Güncelle</button></td>
             </tr><`)
                 $("#alert").text("'" + category.Name + "' Eklendi!");
                 $("#alert").show();
+
 
             }
         })
@@ -197,7 +198,7 @@
     function deleteCategory(id) {
         var categoryId = id;
 
-        var result = window.confirm('Are You Sure?', 'Silme Onay!!');
+        var result = window.confirm('Silmek İstediğinize Emin Misiniz?', 'Silme Onay!!');
         if (result == true) {
 
             $.ajax({
@@ -206,7 +207,7 @@
                 success: function () {
 
 
-                    $("#alert").text("'" + categoryId + "'Silindi!");
+                    $("#alert").text("'" + $("#categoryName_" + categoryId).text() + "'Silindi!");
                     $("#alert").show();
                     $("#categoryid_" + categoryId).fadeOut(1000, function () {
                         console.log(categoryId)
