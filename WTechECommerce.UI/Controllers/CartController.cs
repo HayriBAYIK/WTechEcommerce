@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +13,7 @@ using WTechECommerce.UI.Models.Helper;
 
 namespace WTechECommerce.UI.Controllers
 {
-    public class CartController : Controller
+    public class CartController : SiteBaseController
     {
 
         public IActionResult Index()
@@ -23,6 +24,7 @@ namespace WTechECommerce.UI.Controllers
 
             if (cart != null)
             {
+                decimal totalPrice = 0;
                 foreach (var item in cart.UserCartItems)
                 {
                     ProductCartItemVM productCartItem = new ProductCartItemVM();
@@ -31,7 +33,7 @@ namespace WTechECommerce.UI.Controllers
 
                     productCartItem.Title = product.Name;
                     productCartItem.Description = product.Description;
-                    productCartItem.UnitPrice = product.UnitPrice;
+                    productCartItem.UnitPrice = (product.UnitPrice * item.Quantity).ToString();
                     productCartItem.MainImg = product.MainImgPath;
                     productCartItem.Id = product.Id;
 
@@ -40,12 +42,15 @@ namespace WTechECommerce.UI.Controllers
 
                     model.Add(productCartItem);
 
+                    totalPrice = totalPrice + (product.UnitPrice * item.Quantity);
+
                 }
+
+                ViewBag.TotalPrice = totalPrice.ToString("c", CultureInfo.GetCultureInfo("tr-TR"));
             }
 
             return View(model);
         }
-
 
         [HttpPost]
         public IActionResult AddCart(UserCartItem item)
@@ -97,5 +102,32 @@ namespace WTechECommerce.UI.Controllers
 
             return Json(cartProductCount);
         }
+
+        public IActionResult RemoveItemFromCart(int id)
+        {
+            var cartSession = HttpContext.Session.GetCart("cart");
+
+            if (cartSession != null)
+            {
+                var removeProductItem = cartSession.UserCartItems.FirstOrDefault(q => q.ProductId == id);
+
+                cartSession.UserCartItems.Remove(removeProductItem);
+
+
+                HttpContext.Session.SetCart("cart", cartSession);
+
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult EmptyCart()
+        {
+
+            HttpContext.Session.Remove("cart");
+
+            return RedirectToAction("Index");
+        }
+
     }
 }
