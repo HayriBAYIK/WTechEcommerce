@@ -23,6 +23,8 @@
     <None Remove="Views\AdminProduct\" />
     <None Remove="Models\Helper\" />
     <None Remove="Views\Cart\" />
+    <None Remove="Views\Order\" />
+    <None Remove="Views\Order\Partial\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\site\" />
@@ -52,6 +54,8 @@
     <Folder Include="wwwroot\site\products\" />
     <Folder Include="Models\Helper\" />
     <Folder Include="Views\Cart\" />
+    <Folder Include="Views\Order\" />
+    <Folder Include="Views\Order\Partial\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="wwwroot\admin\img\undraw_posting_photo.svg" />

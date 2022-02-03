@@ -1,0 +1,38 @@
+﻿@model WTechECommerce.UI.Models.OrderPostVM
+
+<div class="col-md-8 order-md-1">
+    <h4 class="mb-3">Billing address</h4>
+    <form class="needs-validation">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                @Html.LabelFor(q => q.Name)
+                @Html.TextBoxFor(q => q.Name, new { @class = "form-control" })
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="col-md-6 mb-3">
+                    @Html.LabelFor(q => q.SurName)
+                    @Html.TextBoxFor(q => q.SurName, new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="mb-3">
+            @Html.LabelFor(q => q.EMail)
+            @Html.TextBoxFor(q => q.EMail, new { @class = "form-control" })
+        </div>
+
+        <div class="mb-3">
+            @Html.LabelFor(q => q.Phone)
+            @Html.TextBoxFor(q => q.Phone, new { @class = "form-control" })
+        </div>
+
+        <div class="mb-3">
+            @Html.LabelFor(q => q.OrderAddress)
+            @Html.TextBoxFor(q => q.OrderAddress, new { @class = "form-control" })
+        </div>
+
+        <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+    </form>
+</div>

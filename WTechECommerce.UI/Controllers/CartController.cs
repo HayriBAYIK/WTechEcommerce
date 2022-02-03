@@ -18,36 +18,11 @@ namespace WTechECommerce.UI.Controllers
 
         public IActionResult Index()
         {
+           
+
             UserCart cart = HttpContext.Session.GetCart("cart");
-
-            List<ProductCartItemVM> model = new List<ProductCartItemVM>();
-
-            if (cart != null)
-            {
-                decimal totalPrice = 0;
-                foreach (var item in cart.UserCartItems)
-                {
-                    ProductCartItemVM productCartItem = new ProductCartItemVM();
-
-                    Product product = ProductManager.GetProductById(item.ProductId);
-
-                    productCartItem.Title = product.Name;
-                    productCartItem.Description = product.Description;
-                    productCartItem.UnitPrice = (product.UnitPrice * item.Quantity).ToString();
-                    productCartItem.MainImg = product.MainImgPath;
-                    productCartItem.Id = product.Id;
-
-                    productCartItem.Quantity = item.Quantity;
-
-
-                    model.Add(productCartItem);
-
-                    totalPrice = totalPrice + (product.UnitPrice * item.Quantity);
-
-                }
-
-                ViewBag.TotalPrice = totalPrice.ToString("c", CultureInfo.GetCultureInfo("tr-TR"));
-            }
+            List<ProductCartItemVM> model = CartHelper.GetCartProducts(cart);
+            ViewBag.TotalPrice = CartHelper.GetTotalPriceWithCurrencyFormat(cart);
 
             return View(model);
         }

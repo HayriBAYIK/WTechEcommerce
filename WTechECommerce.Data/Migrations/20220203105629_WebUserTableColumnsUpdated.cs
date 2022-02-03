@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WTechECommerce.Data.Migrations
 {
-    public partial class dbInit1 : Migration
+    public partial class WebUserTableColumnsUpdated : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -51,6 +51,8 @@ namespace WTechECommerce.Data.Migrations
                     Email = table.Column<string>(nullable: true),
                     Address = table.Column<string>(nullable: true),
                     Password = table.Column<string>(nullable: true),
+                    Phone = table.Column<string>(nullable: true),
+                    IsGuest = table.Column<bool>(nullable: false),
                     BirthDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>

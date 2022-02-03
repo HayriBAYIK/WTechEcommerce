@@ -10,8 +10,8 @@ using WTechECommerce.Data.ORM.Context;
 namespace WTechECommerce.Data.Migrations
 {
     [DbContext(typeof(WTechECommerceContext))]
-    [Migration("20220201112640_dbInit1")]
-    partial class dbInit1
+    [Migration("20220203105629_WebUserTableColumnsUpdated")]
+    partial class WebUserTableColumnsUpdated
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -277,10 +277,16 @@ namespace WTechECommerce.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsGuest")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Surname")
