@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using WTechECommerce.Data.ORM.Context;
 using WTechECommerce.Data.ORM.Entites;
 
@@ -15,6 +17,17 @@ namespace WTechECommerce.Business.Manager.OrderDetailManager
 
             wTechECommerceContext.OrderDetails.Add(orderDetail);
             wTechECommerceContext.SaveChanges();
+        }
+
+        public static List<OrderDetail> GetListById(int id)
+        {
+            WTechECommerceContext wTechECommerceContext = new WTechECommerceContext();
+
+            List<OrderDetail> orderDetails = wTechECommerceContext.OrderDetails.Where(q => q.Id == id && q.IsDeleted == false).ToList();
+
+
+
+            return orderDetails;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using WTechECommerce.Data.ORM.Context;
 using WTechECommerce.Data.ORM.Entites;
 
@@ -15,6 +16,15 @@ namespace WTechECommerce.Business.Manager.OrderManager
 
             wTechECommerceContext.Orders.Add(order);
             wTechECommerceContext.SaveChanges();
+        }
+
+        public static Order GetOrderById(int id)
+        {
+            WTechECommerceContext wTechECommerceContext = new WTechECommerceContext();
+
+            Order order = wTechECommerceContext.Orders.FirstOrDefault(q=>q.Id==id&&q.IsDeleted==false);
+
+            return order;
         }
     }
 }
