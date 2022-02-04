@@ -14,6 +14,7 @@ namespace WTechECommerce.Business.Manager.OrderManager
             order.AddDate = DateTime.Now;
 
             wTechECommerceContext.Orders.Add(order);
+            wTechECommerceContext.SaveChanges();
         }
     }
 }

@@ -14,6 +14,7 @@ namespace WTechECommerce.Business.Manager.WebUserManager
             webUser.AddDate = DateTime.Now;
             webUser.IsDeleted = false;
             wTechECommerceContext.Add(webUser);
+            wTechECommerceContext.SaveChanges();
 
             return webUser;
 

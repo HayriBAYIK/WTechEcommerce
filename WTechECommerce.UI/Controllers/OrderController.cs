@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using WTechECommerce.Business.Manager.OrderDetailManager;
+using WTechECommerce.Business.Manager.OrderManager;
 using WTechECommerce.Business.Manager.WebUserManager;
 using WTechECommerce.Data.ORM.Entites;
 using WTechECommerce.UI.Models;
@@ -38,6 +40,7 @@ namespace WTechECommerce.UI.Controllers
         {
             if (ModelState.IsValid)
             {
+                //Misafir kullanıcı kaydı açtı
                 WebUser webUser = new WebUser();
                 webUser.IsGuest = true;
                 webUser.Name = model.Name;
@@ -45,19 +48,47 @@ namespace WTechECommerce.UI.Controllers
                 webUser.Email = model.EMail;
                 webUser.Phone = model.Phone;
 
-                WebUser newWebUser = WebUserManager.Add(webUser);
+                WebUserManager.Add(webUser);
 
 
-
+                //Siparişini genel özelliklerini ekliyoryuz
                 Order order = new Order();
-                order.WebUserId = newWebUser.Id;
+                order.WebUserId = webUser.Id;
                 order.OrderAddress = model.OrderAddress;
                 order.OrderDate = DateTime.Now;
-               
 
-                
+                Random rnd = new Random();
+                int orderCode = rnd.Next(1, 100000);
+
+                order.OrderCode = orderCode.ToString();
+
+                OrderManager.Add(order);
+
+
+                //Sepetten ürünleri çekip sipariş detayı ekliyoruz.
+
+                UserCart cart = HttpContext.Session.GetCart("cart");
+
+
+                foreach (var item in cart.UserCartItems)
+                {
+                    OrderDetail orderDetail = new OrderDetail();
+                    orderDetail.OrderId = order.Id;
+                    orderDetail.ProductId = item.ProductId;
+                    orderDetail.Quantity = item.Quantity;
+
+                    OrderDetailManager.Add(orderDetail);
+                }
+
+
             }
 
+            return View("OrderSuccess");
+        }
+
+        public IActionResult OrderSuccess()
+        {
+            HttpContext.Session.Clear();
             return View();
         }
     }

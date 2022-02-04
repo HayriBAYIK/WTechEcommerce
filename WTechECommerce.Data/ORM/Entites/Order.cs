@@ -10,6 +10,7 @@ namespace WTechECommerce.Data.ORM.Entites
         public DateTime OrderDate { get; set; }
         public int WebUserId { get; set; }
         public string OrderAddress { get; set; }
+        public string OrderCode { get; set; }
 
         [ForeignKey("WebUserId")]
         public WebUser WebUser { get; set; }

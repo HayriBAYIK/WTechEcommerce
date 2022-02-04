@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WTechECommerce.Data.ORM.Context;
 
 namespace WTechECommerce.Data.Migrations
 {
     [DbContext(typeof(WTechECommerceContext))]
-    partial class WTechECommerceContextModelSnapshot : ModelSnapshot
+    [Migration("20220203111210_DbInit")]
+    partial class DbInit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -78,9 +80,6 @@ namespace WTechECommerce.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("OrderAddress")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("OrderCode")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("OrderDate")

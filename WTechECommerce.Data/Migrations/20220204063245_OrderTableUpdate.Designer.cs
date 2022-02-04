@@ -10,8 +10,8 @@ using WTechECommerce.Data.ORM.Context;
 namespace WTechECommerce.Data.Migrations
 {
     [DbContext(typeof(WTechECommerceContext))]
-    [Migration("20220203105629_WebUserTableColumnsUpdated")]
-    partial class WebUserTableColumnsUpdated
+    [Migration("20220204063245_OrderTableUpdate")]
+    partial class OrderTableUpdate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -80,6 +80,9 @@ namespace WTechECommerce.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("OrderAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OrderCode")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("OrderDate")

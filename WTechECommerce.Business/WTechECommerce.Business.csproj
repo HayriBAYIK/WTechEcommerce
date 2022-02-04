@@ -10,12 +10,14 @@
     <None Remove="Manager\ProductImageManager\" />
     <None Remove="Manager\WebUserManager\" />
     <None Remove="Manager\OrderManager\" />
+    <None Remove="Manager\OrderDetailManager\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Manager\CategoryManager\" />
     <Folder Include="Manager\ProductImageManager\" />
     <Folder Include="Manager\WebUserManager\" />
     <Folder Include="Manager\OrderManager\" />
+    <Folder Include="Manager\OrderDetailManager\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WTechECommerce.Data\WTechECommerce.Data.csproj" />
