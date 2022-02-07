@@ -86,6 +86,7 @@ namespace WTechECommerce.UI.Controllers
         }
         public IActionResult Delete(int id)
         {
+            AdminUserManager.Delete(id);
 
             return RedirectToAction("Index", "AdminUser");
         }

@@ -74,7 +74,7 @@ namespace WTechECommerce.Business.Manager.AdminUserManager
         {
             WTechECommerceContext wTechECommerceContext = new WTechECommerceContext();
 
-            AdminUser adminUser = GetAdminUserById(id);
+            AdminUser adminUser = wTechECommerceContext.AdminUsers.FirstOrDefault(q => q.Id == id);
 
             adminUser.IsDeleted = true;
 
