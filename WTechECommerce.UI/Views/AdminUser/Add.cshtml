@@ -1,0 +1,62 @@
+﻿@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@model WTechECommerce.UI.Models.AdminUserAddVM
+
+    <div class="row">
+        
+        <div class="col-3">
+
+        </div>
+
+        <div class="col-6 ">
+
+            <form action="/AdminUser/Add" method="post">
+
+                <div>
+                    @Html.ValidationSummary()
+
+                </div>
+                <div>
+                    <br />
+                    @Html.LabelFor(q => q.drpRoles)
+
+                    <select name="drpRoles" class="form-control">
+
+                        <option value="SuperAdmin">SuperAdmin</option>
+                        <option value="Editor">Editor</option>
+
+
+                    </select>
+
+
+                </div>
+                <div>
+
+                    @Html.LabelFor(q => q.EMail)
+                    @Html.TextBoxFor(q => q.EMail, new { @class = "form-control" })
+                </div>
+                <div>
+
+                    @Html.LabelFor(q => q.Password)
+                    @Html.PasswordFor(q => q.Password, new { @class = "form-control" })
+                </div>
+                <div>
+                    @Html.LabelFor(q => q.ConfirmPassword)
+                    @Html.PasswordFor(q => q.ConfirmPassword, new { @class = "form-control" })
+                </div>
+
+                <br />
+
+                <input type="submit" class="btn btn-primary" value="Add" />
+
+            </form>
+
+
+        </div>
+        <div class="col-3">
+
+        </div>
+    </div>
+

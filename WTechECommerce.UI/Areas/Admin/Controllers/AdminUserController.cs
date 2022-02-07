@@ -23,5 +23,31 @@ namespace WTechECommerce.UI.Controllers
             return View(adminUsers);
         }
 
+        public IActionResult Add()
+        {
+            AdminUserAddVM model = new AdminUserAddVM();
+          
+            return View(model);
+        }
+        [HttpPost]
+        public IActionResult Add(AdminUserAddVM adminUserAddVM)
+        {
+            if (ModelState.IsValid)
+            {
+                AdminUser adminUser = new AdminUser();
+                adminUser.Email = adminUserAddVM.EMail;
+                adminUser.Password = adminUserAddVM.Password;
+                adminUser.Role = adminUserAddVM.drpRoles;
+
+                AdminUserManager.Add(adminUser);
+
+            }
+          
+        }
+        public IActionResult Delete(int id)
+        {
+
+            return RedirectToAction("Index", "AdminUser");
+        }
     }
 }
