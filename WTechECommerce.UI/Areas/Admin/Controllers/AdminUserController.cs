@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using WTechECommerce.Business.Manager.AdminUserManager;
 using WTechECommerce.Data.ORM.Entites;
+using WTechECommerce.UI.Areas.Admin.Controllers;
 using WTechECommerce.UI.Models;
+using WTechECommerce.UI.Models.Filters;
 
 namespace WTechECommerce.UI.Controllers
 {
-    public class AdminUserController : Controller
+    [RoleControl("SuperAdmin")]
+    public class AdminUserController : AdminBaseController
     {
         public IActionResult Index()
         {

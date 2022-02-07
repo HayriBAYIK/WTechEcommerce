@@ -27,9 +27,8 @@
                                 <th>OrderDate</th>
                                 <th>OrderCode</th>
                                 <th>WebUser</th>
-                                <th> </th>
-
-
+                                <th> Total Price</th>
+                                <th> İşlem</th>
                             </tr>
                         </thead>
                         <tfoot>
@@ -39,7 +38,7 @@
                                 <th>OrderCode</th>
                                 <th>WebUser</th>
                                 <th>Total Price</th>
-                                <th> </th>
+                                <th> İşlem</th>
 
                             </tr>
                         </tfoot>
@@ -52,7 +51,7 @@
                                 <td>@item.OrderDate</td>
                                 <td>@item.OrderCode</td>
                                 <td>@item.WebUser?.Name </td>
-                                <td>@item.TotalPrice.</td>
+                                <td>@item.TotalPrice</td>
 
                                 <td><button id="@item.Id" onclick="getOrderDetail(@item.Id)" class="btn btn-primary">Detay</button> </td>
 
@@ -120,7 +119,7 @@
        
 
             $.ajax({
-                url: "/AdminOrderList/GetOrderDetail/" + categoryId,
+                url: "/AdminOrder/GetOrderDetail/" + categoryId,
                 type: "GET",
                 success: function (data) {
                     

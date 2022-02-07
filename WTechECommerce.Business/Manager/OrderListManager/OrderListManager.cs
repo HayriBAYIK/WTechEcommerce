@@ -32,7 +32,7 @@ namespace WTechECommerce.Business.Manager.OrderListManager
         {
             WTechECommerceContext wTechECommerceContext = new WTechECommerceContext();
 
-            decimal totalPrice = wTechECommerceContext.OrderDetails.Where(q => q.OrderId == id).Select(i => i.Price).Sum();
+            decimal totalPrice = wTechECommerceContext.OrderDetails.Where(q => q.OrderId == id).Select(i => i.Price * i.Quantity).Sum();
 
             return totalPrice;
 

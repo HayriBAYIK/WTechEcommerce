@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WTechECommerce.Business.Manager.OrderDetailManager;
 using WTechECommerce.Business.Manager.OrderManager;
+using WTechECommerce.Business.Manager.ProductManager;
 using WTechECommerce.Business.Manager.WebUserManager;
 using WTechECommerce.Data.ORM.Entites;
 using WTechECommerce.UI.Models;
@@ -76,6 +77,11 @@ namespace WTechECommerce.UI.Controllers
                     orderDetail.OrderId = order.Id;
                     orderDetail.ProductId = item.ProductId;
                     orderDetail.Quantity = item.Quantity;
+
+                    //Fiyat için db den ürünü buluyoruz.
+
+                    Product product = ProductManager.GetProductById(item.ProductId);
+                    orderDetail.Price = product.UnitPrice;
 
                     OrderDetailManager.Add(orderDetail);
                 }

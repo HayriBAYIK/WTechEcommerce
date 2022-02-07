@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,11 +8,14 @@ using WTechECommerce.Business.Manager.OrderListManager;
 using WTechECommerce.Business.Manager.OrderManager;
 using WTechECommerce.Business.Manager.ProductManager;
 using WTechECommerce.Business.Manager.WebUserManager;
+using WTechECommerce.UI.Areas.Admin.Controllers;
 using WTechECommerce.UI.Models;
+using WTechECommerce.UI.Models.Filters;
 
 namespace WTechECommerce.UI.Controllers
 {
-    public class AdminOrderListController : Controller
+    [RoleControl("SuperAdmin")]
+    public class AdminOrderController : AdminBaseController
     {
         public IActionResult Index()
         {

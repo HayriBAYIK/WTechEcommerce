@@ -6,10 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using WTechECommerce.Business.Manager.CategoryManager;
 using WTechECommerce.Data.ORM.Entites;
 using WTechECommerce.UI.Models;
+using WTechECommerce.UI.Models.Filters;
 
 namespace WTechECommerce.UI.Areas.Admin.Controllers
 {
-    public class AdminCategoryController : Controller
+    [RoleControl("Editor")]
+    public class AdminCategoryController : AdminBaseController
     {
     
         public IActionResult Index()

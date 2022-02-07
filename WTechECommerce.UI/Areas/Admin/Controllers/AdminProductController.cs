@@ -9,10 +9,12 @@ using WTechECommerce.Business.Manager.ProductImageManager;
 using WTechECommerce.Business.Manager.ProductManager;
 using WTechECommerce.Data.ORM.Entites;
 using WTechECommerce.UI.Areas.Admin.Models;
+using WTechECommerce.UI.Models.Filters;
 
 namespace WTechECommerce.UI.Areas.Admin.Controllers
 {
-    public class AdminProductController : Controller
+    [RoleControl("Editor")]
+    public class AdminProductController : AdminBaseController
     {
  
         public IActionResult Index()

@@ -73,5 +73,15 @@ namespace WTechECommerce.Business.Manager.AdminUserManager
         }
 
 
+        public static AdminUser AdminUserLoginControl(string email, string password)
+        {
+            WTechECommerceContext wTechECommerceContext = new WTechECommerceContext();
+
+            AdminUser adminUser = wTechECommerceContext.AdminUsers.FirstOrDefault(q => q.IsDeleted == false && q.Email == email && q.Password == password);
+
+            return adminUser;
+        }
+
+
     }
 }

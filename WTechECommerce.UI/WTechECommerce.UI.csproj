@@ -25,6 +25,9 @@
     <None Remove="Views\Cart\" />
     <None Remove="Views\Order\" />
     <None Remove="Views\Order\Partial\" />
+    <None Remove="Views\AdminLogin\" />
+    <None Remove="Models\Filters\" />
+    <None Remove="Views\Error\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\site\" />
@@ -56,6 +59,10 @@
     <Folder Include="Views\Cart\" />
     <Folder Include="Views\Order\" />
     <Folder Include="Views\Order\Partial\" />
+    <Folder Include="Views\AdminLogin\" />
+    <Folder Include="Models\Filters\" />
+    <Folder Include="Views\Error\" />
+    <Folder Include="Views\AdminHome\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="wwwroot\admin\img\undraw_posting_photo.svg" />
