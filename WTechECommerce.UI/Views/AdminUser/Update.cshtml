@@ -1,0 +1,77 @@
+﻿@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@model WTechECommerce.UI.Models.AdminUserUpdateVM
+<div class="row">
+
+    <div class="col-3">
+
+    </div>
+
+    <div class="col-6 ">
+
+        <form action="/AdminUser/Update" method="post">
+
+            <div>
+                @Html.ValidationSummary()
+
+            </div>
+            <div>
+                @Html.HiddenFor(q => q.Id)
+                <br />
+                @Html.LabelFor(q => q.drpRoles)
+                @if (Model.drpRoles == "SuperAdmin")
+                {
+                    <select name="drpRoles" class="form-control">
+
+                        <option value="SuperAdmin" selected>SuperAdmin</option>
+                        <option value="Editor">Editor</option>
+
+
+                    </select>
+
+                }
+                @if (Model.drpRoles == "Editor")
+                {
+                    <select name="drpRoles" class="form-control">
+
+                        <option value="SuperAdmin">SuperAdmin</option>
+                        <option value="Editor" selected>Editor</option>
+
+
+                    </select>
+                }@if(Model.drpRoles!="0"&& Model.drpRoles == "Editor"&& Model.drpRoles == "SuperAdmin")
+                {
+            <select name="drpRoles" class="form-control">
+                <option value="Null">Lütfen Role Seçiniz.</option>
+                <option value="SuperAdmin">SuperAdmin</option>
+                <option value="Editor">Editor</option>
+
+
+            </select>
+                }
+
+
+
+            </div>
+            <div>
+
+                @Html.LabelFor(q => q.EMail)
+                @Html.TextBoxFor(q => q.EMail, new { @class = "form-control" })
+            </div>
+
+
+            <br />
+
+            <input type="submit" class="btn btn-primary" value="Update" />
+
+        </form>
+
+
+    </div>
+    <div class="col-3">
+
+    </div>
+</div>
+

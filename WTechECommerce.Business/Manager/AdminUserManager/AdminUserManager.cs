@@ -20,7 +20,17 @@ namespace WTechECommerce.Business.Manager.AdminUserManager
             return adminUsers;
 
         }
-    
+        public static List<AdminUser> GetAdminUsers(string email)
+        {
+            WTechECommerceContext wTechECommerceContext = new WTechECommerceContext();
+
+            List<AdminUser> adminUsers = wTechECommerceContext.AdminUsers.Where(q => q.IsDeleted == false && q.Email != email).ToList();
+
+            return adminUsers;
+
+        }
+
+
 
         public static AdminUser GetAdminUserById(int id)
         {
@@ -50,10 +60,10 @@ namespace WTechECommerce.Business.Manager.AdminUserManager
 
             int id = adminUser.Id;
 
-            AdminUser theAdminUser = GetAdminUserById(id);
+            AdminUser theAdminUser = wTechECommerceContext.AdminUsers.FirstOrDefault(q=>q.Id==id);
 
             theAdminUser.Email = adminUser.Email;
-            theAdminUser.Password = adminUser.Password;
+            theAdminUser.Role = adminUser.Role;            
 
             wTechECommerceContext.SaveChanges();
 
