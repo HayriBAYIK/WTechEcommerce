@@ -40,9 +40,13 @@ namespace WTechECommerce.UI.Controllers
                 adminUser.Role = adminUserAddVM.drpRoles;
 
                 AdminUserManager.Add(adminUser);
+                return RedirectToAction("Index");
 
             }
-          
+
+            return View();
+
+
         }
         public IActionResult Delete(int id)
         {
